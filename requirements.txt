@@ -1,5 +1,4 @@
 Flask_WTF==0.14.3
-Python==3.7.11
 xgboost==1.5.0
 numpy==1.21.2
 Flask==1.1.2
