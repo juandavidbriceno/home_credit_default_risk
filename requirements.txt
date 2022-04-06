@@ -8,6 +8,9 @@ flask==1.1.2
     # via
     #   -r requirements.in
     #   flask-wtf
+    
+itsdangerous==2.0.1
+
 fonttools==4.25.0
     # via matplotlib
 importlib-metadata==4.11.3
