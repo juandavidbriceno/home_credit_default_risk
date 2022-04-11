@@ -13,11 +13,11 @@ app.config['SECRET_KEY'] = '75441f27d441f27567d441f2b6176a'
 cd = os.getcwd()
 
 #Load Data.
-final_dict_df = load_object('static/data/final_dict_df.pkl')
+#final_dict_df = load_object('static/data/final_dict_df.pkl')
 
 #Load classifier.
-classifier = load_object('static/classifiers/classifier_gd_sr.pkl')
-classifier = classifier.best_estimator_
+#classifier = load_object('static/classifiers/classifier_gd_sr.pkl')
+#classifier = classifier.best_estimator_
 
 
 #formulaire d'appel à l'API (facultatif)
