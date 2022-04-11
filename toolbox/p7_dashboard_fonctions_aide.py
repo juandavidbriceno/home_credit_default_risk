@@ -1,3 +1,7 @@
+from sklearn.linear_model import LogisticRegression
+#from sklearn.preprocessing import OneHotEncoder
+#from sklearn.preprocessing import MinMaxScaler
+import sklearn_json as skljson
 import urllib.parse
 from urllib.request import urlopen
 import os
@@ -18,41 +22,33 @@ from wtforms.fields import StringField
 from wtforms import TextField, BooleanField, PasswordField, TextAreaField, validators
 from wtforms.widgets import TextArea
 import xgboost
+import dill
 
-def load_data():
-    data = {'id':['01', '02', '03', '04'], 'name':['Tom', 'nick', 'krish', 'jack']}
-    df = pd.DataFrame(data)
-    return data, df
+#Define a function that allows to load a binary object.
+def load_object(path_to_file):
+    with open(path_to_file, 'rb') as file:
+        obj = dill.load(file)
+    return obj
 
-def client_name_from_id(id_client, df):
-    df_copy = df[df["id"].isin([id_client])]
-    name = df_copy["name"].values
-    name = name[0]
-    return name
+#Define a function that allows to convert a logistic regression classifier into a json file.
+def logistic_regression_to_json(lrmodel, file=None):
+    if file is not None:
+        serialize = lambda x: json.dump(x, file)
+    else:
+        serialize = json.dumps
+    data = {}
+    data['init_params'] = lrmodel.get_params()
+    data['model_params'] = mp = {}
+    for p in ('coef_', 'intercept_','classes_', 'n_iter_'):
+        mp[p] = getattr(lrmodel, p).tolist()
+    return serialize(data)
 
-def create_points():
-    x = [ i for i in range(0,10)]
-    names = ['Tom', 'nick', 'krish', 'jack']
-    x_vals = []
-    y_vals = []
-    for i in range(0,len(names)):
-        x_vals.append(x)
-        y = np.sin(x)*i + i -2
-        y_vals.append(y)
+#Define a function that allows to convert a json file into a logistic regression classifier.
+def logistic_regression_from_json(jstring):
+    data = json.loads(jstring)
+    model = LogisticRegression(**data['init_params'])
+    for name, p in data['model_params'].items():
+        setattr(model, name, np.array(p))
+    return model
 
-    new_dict = {i:[j, k] for i, j, k in zip(names, x_vals, y_vals)}
-    return new_dict
 
-def plot_person_points(id_client, df, dict_data, path):
-    name = client_name_from_id(id_client, df)
-    x = dict_data[name][0]
-    y = dict_data[name][1]
-    img_name = 'new_plot_'+id_client+'.jpg'
-    img = io.BytesIO()
-    plt.figure(figsize=(200,270))
-    plt.title("hola",fontsize=40)
-    plt.plot(x, y, color='black')
-    #plt.tight_layout()
-    plt.savefig(path+'/'+img_name)
-    return img_name
- 
