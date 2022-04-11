@@ -6,7 +6,7 @@ cloudpickle==2.0.0
 
 dask==2021.8.0
 
-dill==0.3.4
+dill==0.3.2
 
 fsspec==2022.2.0
 
