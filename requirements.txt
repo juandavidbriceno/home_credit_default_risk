@@ -6,6 +6,8 @@ dask==2022.2.0
 
 dill==0.3.4
 
+fsspec==2022.3.0
+
 cycler==0.11.0
     # via matplotlib
 flask-wtf==0.14.3
