@@ -10,6 +10,8 @@ fsspec==2022.3.0
 
 joblib==1.1.0
 
+locket==0.2.1
+
 cycler==0.11.0
     # via matplotlib
 flask-wtf==0.14.3
