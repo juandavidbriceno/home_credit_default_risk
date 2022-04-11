@@ -23,12 +23,18 @@ from wtforms import TextField, BooleanField, PasswordField, TextAreaField, valid
 from wtforms.widgets import TextArea
 import xgboost
 import dill
+import joblib
 
 #Define a function that allows to load a binary object.
+#def load_object(path_to_file):
+#    with open(path_to_file, 'rb') as file:
+#        obj = dill.load(file)
+#    return obj
+
+#Define a function that allows to load binary objects.
 def load_object(path_to_file):
-    with open(path_to_file, 'rb') as file:
-        obj = dill.load(file)
-    return obj
+    ob = joblib.load(path_to_file)
+    return ob
 
 #Define a function that allows to convert a logistic regression classifier into a json file.
 def logistic_regression_to_json(lrmodel, file=None):
