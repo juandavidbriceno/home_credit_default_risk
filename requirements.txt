@@ -24,6 +24,8 @@ threadpoolctl==3.1.0
 
 toolz==0.11.2
 
+seaborn==0.11.0
+
 cycler==0.11.0
     # via matplotlib
 flask-wtf==0.14.3
