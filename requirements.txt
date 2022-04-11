@@ -4,7 +4,7 @@ click==8.0.4
     # via flask
 cloudpickle==2.0.0
 
-dask==2022.2.0
+dask==2021.8.0
 
 dill==0.3.4
 
