@@ -1,2 +1,2 @@
-web: gunicorn app:app sisapa
+web: gunicorn app:app
 
